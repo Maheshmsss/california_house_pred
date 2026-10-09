@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HouseAI | Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-house"></i>
+            </div>
+
+            <div>
+                <h2>HouseAI</h2>
+                <span>Smart Prediction</span>
+            </div>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">
+                <i class="fa-solid fa-house"></i>
+                Home
+            </a>
+
+            <a href="#predict">
+                <i class="fa-solid fa-chart-line"></i>
+                Predict
+            </a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO SECTION -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <span class="badge">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                AI Powered
+            </span>
+
+            <h1>
+                Predict Your
+                <span>House Value</span>
+            </h1>
+
+            <p>
+                Enter your house information and let our
+                Machine Learning model estimate the property value.
+            </p>
+
+            <div class="hero-features">
+
+                <div>
+                    <i class="fa-solid fa-brain"></i>
+                    <span>ML Model</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Fast Prediction</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <span>Simple & Easy</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="house-illustration">
+
+            <div class="circle circle1"></div>
+            <div class="circle circle2"></div>
+
+            <div class="house-icon">
+                <i class="fa-solid fa-house-chimney"></i>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PREDICTION CARD -->
+
+    <section class="prediction-section" id="predict">
+
+        <div class="section-heading">
+
+            <span class="small-title">
+                <i class="fa-solid fa-sliders"></i>
+                HOUSE DETAILS
+            </span>
+
+            <h2>Enter Property Information</h2>
+
+            <p>
+                Fill in the details below to generate a prediction.
+            </p>
+
+        </div>
+
+
+        <div class="prediction-card">
+
+            <form action="/predict" method="POST">
+
+                <div class="input-grid">
+
+                    {% for column in columns %}
+
+                    <div class="input-box">
+
+                        <label for="{{ column }}">
+                            <i class="fa-solid fa-circle-dot"></i>
+                            {{ column }}
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-pen"></i>
+
+                            <input
+                                type="number"
+                                step="any"
+                                id="{{ column }}"
+                                name="{{ column }}"
+                                placeholder="Enter {{ column }}"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+                <button type="submit" class="predict-btn">
+
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                    Predict House Value
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            {% if prediction is defined %}
+
+            <div class="result-card">
+
+                <div class="result-icon">
+                    <i class="fa-solid fa-house-circle-check"></i>
+                </div>
+
+                <div class="result-text">
+
+                    <span>YOUR PREDICTED HOUSE VALUE</span>
+
+                    <h2>{{ prediction }}</h2>
+
+                    <p>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Prediction generated successfully
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="footer-logo">
+            <i class="fa-solid fa-house"></i>
+            HouseAI
+        </div>
+
+        <p>
+            Powered by Machine Learning
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
